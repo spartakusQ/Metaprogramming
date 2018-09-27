@@ -1,6 +1,6 @@
 # class for route control stations
 class Route
-  include Validate
+  include Validation
   attr_reader :stations, :from, :to
 
   def initialize(from, to)
@@ -28,11 +28,5 @@ class Route
     puts "В маршрутный лист #{stations.first.station_name}
      - #{stations.last.station_name} входят станции с именами: "
     stations.each { |station| puts " #{station.station_name}" }
-  end
-
-  protected
-
-  def validate!
-    raise 'Станция не была выбрана.' unless @stations.first && @stations.last
   end
 end

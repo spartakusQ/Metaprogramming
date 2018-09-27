@@ -13,7 +13,7 @@ class Main
   attr_accessor :station, :trains, :train, :route, :stations,
                 :number, :name, :carriage, :type, :carriages, :num
 
-  include Validate
+  include Validation
 
   def initialize
     @stations = []

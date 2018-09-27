@@ -3,7 +3,7 @@ require_relative 'company_name'
 require_relative 'validation'
 # class for trains management
 class Train
-  include Validate
+  include Validation
   include InstanceCounter
   include CompanyName
   attr_accessor :number, :route, :station
@@ -12,11 +12,13 @@ class Train
 
   @@trains = {}
 
+validate :number, :presence
+validate :number, :format, VALID_NUMBER
+
   def initialize(number)
     @number = number
     @carriage = []
     @speed = 0
-    validate!
     @@trains[number] = self
     register_instance
   end
@@ -103,15 +105,8 @@ class Train
 
   def move_previous
     return if first_station?
-
     current_station.depart_train(self)
     @station_index -= 1 if @station_index > 0
     current_station.add_train(self)
-  end
-
-  protected
-
-  def validate!
-    raise 'Номер поезда неправильного формата' if number.to_s !~ VALID_NUMBER
   end
 end

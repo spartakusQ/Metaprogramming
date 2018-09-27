@@ -2,7 +2,7 @@ require_relative 'validation'
 # class for controlling trains at the station
 class TrainStation
   include InstanceCounter
-  include Validate
+  include Validation
   attr_reader :station_name, :trains
   @@station_name = []
 
